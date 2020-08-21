@@ -1,8 +1,11 @@
 local waterVol = 0
+local on = true
 
 function drink_water()
-    waterVol = waterVol + 25
-    show_volume()
+    if on then
+        waterVol = waterVol + 25
+        show_volume()
+    end
 end
 
 function show_volume()
@@ -18,5 +21,16 @@ function show_volume()
     mp.osd_message("Water volume: " .. volume .. metric, 1)
 end
 
-timer = mp.add_periodic_timer(60*3, drink_water)
+function on_off()
+    on = not on
+	mp.osd_message("Hydration reminder", 1)
+    if on then
+        mp.osd_message("hydration reminder: ON", 1)
+    else
+        mp.osd_message("hydration reminder: OFF", 1)
+    end
+end
+
+timer = mp.add_periodic_timer(3, drink_water)
 mp.add_key_binding("'", "show_volume", show_volume)
+mp.add_key_binding("\"", "on_off", on_off)
