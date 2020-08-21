@@ -31,6 +31,6 @@ function on_off()
     end
 end
 
-timer = mp.add_periodic_timer(3, drink_water)
+timer = mp.add_periodic_timer(3*60, drink_water)
 mp.add_key_binding("'", "show_volume", show_volume)
 mp.add_key_binding("\"", "on_off", on_off)
